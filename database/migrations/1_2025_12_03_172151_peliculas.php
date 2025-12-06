@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->string('director', 60);
             $table->string('genero', 60);
             $table->text('actores');
-            $table->date('year', 60);
-            $table->decimal('duracion', 6);
+            $table->date('fecha_estreno');
+            $table->integer('duracion');
             $table->string('clasificacion', 60);
             $table->string('portada',100)->unique()->nullable();
             $table->timestamps();

@@ -1,0 +1,144 @@
+/* -------------------------------------- */
+/* Variables de color: Tema Gris Oscuro y Púrpura */
+/* -------------------------------------- */
+:root {
+    --rent-dark: #121212; /* Fondo de la aplicación muy oscuro */
+    --rent-table-bg: #1e1e1e; /* Fondo de la tabla/modal */
+    --rent-header-bg: #2d2d2d; /* Fondo de la cabecera */
+    --rent-accent: #8b5cf6; /* Púrpura suave de acento */
+    --rent-focus: #c4b5fd; /* Púrpura claro para hover/selección */
+    --rent-light: #f5f5f5; /* Texto claro */
+    --rent-secondary: #a0a0a0; /* Texto secundario/Bordes */
+    --rent-danger: #ef4444; /* Rojo para eliminación */
+    --rent-warning: #f97316; /* Naranja para edición */
+}
+
+/* Aplicar el fondo oscuro a todo el contenido, asumiendo que el body de template.blade ya es oscuro */
+.table-container {
+    padding: 1.5rem 0;
+}
+
+/* Estilos de la tabla base */
+.table-hover {
+    width: 100%;
+    margin-top: 1.5rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background-color: var(--rent-table-bg);
+    color: var(--rent-light);
+}
+
+/* Cabecera (Thead) */
+.table-hover thead {
+    background-color: var(--rent-header-bg);
+    border-bottom: 2px solid var(--rent-accent);
+}
+
+.table-hover th {
+    padding: 1rem 1.2rem;
+    text-align: left;
+    color: var(--rent-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: none;
+}
+
+/* Cuerpo (Tbody) */
+.table-hover tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.table-hover tbody tr:nth-child(even) {
+    background-color: #242424; /* Alternar colores para legibilidad */
+}
+.table-hover tbody tr:nth-child(odd) {
+    background-color: var(--rent-table-bg);
+}
+
+/* Efecto Hover */
+.table-hover tbody tr:hover {
+    background-color: #333;
+    color: var(--rent-focus);
+}
+
+.table-hover td {
+    padding: 1rem 1.2rem;
+    border-top: 1px solid #333;
+    font-size: 0.95rem;
+    color: var(--rent-secondary);
+}
+/* Estilo para el ID de alquiler (primera columna) */
+.table-hover td:first-child {
+    font-weight: 700;
+    color: var(--rent-accent);
+}
+
+/* Pie de página (Tfoot) */
+.table-hover tfoot {
+    background-color: var(--rent-header-bg);
+    border-top: 2px solid var(--rent-accent);
+}
+.table-hover tfoot th {
+    color: var(--rent-light);
+    font-weight: 700;
+}
+
+/* -------------------------------------- */
+/* Botones de Acción */
+/* -------------------------------------- */
+
+/* Botón Edit */
+.btn-warning {
+    background-color: var(--rent-warning);
+    border-color: var(--rent-warning);
+    color: var(--rent-dark) !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-warning:hover {
+    background-color: #fb923c;
+    border-color: #fb923c;
+    transform: translateY(-1px);
+}
+
+/* Botón Delete */
+.btn-danger {
+    background-color: var(--rent-danger);
+    border-color: var(--rent-danger);
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-danger:hover {
+    background-color: #f87171;
+    border-color: #f87171;
+    transform: translateY(-1px);
+}
+
+
+/* -------------------------------------- */
+/* Estilos de la Ventana Modal (Bootstrap) */
+/* -------------------------------------- */
+
+.modal-content {
+    background-color: var(--rent-table-bg) !important;
+    color: var(--rent-light) !important;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.modal-header, .modal-footer {
+    border-color: #333 !important;
+}
+
+.modal-title {
+    color: var(--rent-accent) !important;
+}
+
+.modal-body {
+    color: var(--rent-secondary);
+}

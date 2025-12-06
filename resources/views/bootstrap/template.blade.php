@@ -1,67 +1,152 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="{{ url('assets/img/favicon.ico') }}"></link>
-    <!-- directiva -->
+    <link rel="icon" type="image/x-icon" href="{{ url('assets/img/favicon.ico') }}">
+    
     <title>
-      @yield('title','Barber Shop') 
+        @yield('title','VideoClub App') 
     </title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="{{ url('assets/css/styles.css') }}">
     @yield('styles')
-  </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <style>
+        /* Variables y base oscura */
+        :root {
+            --videoclub-dark: #1c1c1c; /* Fondo principal */
+            --videoclub-red: #e50914; /* Rojo de acento (Netflix/Cine) */
+            --videoclub-gold: #ffc300; /* Dorado/Amarillo de acento */
+            --videoclub-light: #f7f7f7; /* Texto claro */
+        }
+
+        body {
+            background-color: var(--videoclub-dark);
+            color: var(--videoclub-light);
+            min-height: 100vh; /* Para ocupar toda la pantalla */
+        }
+
+        /* Contenedor principal para un mejor look and feel */
+        .container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        /* Barra de Navegación */
+        .bg-dark-custom {
+            background-color: #0d0d0d !important; /* Negro aún más oscuro para el nav */
+            border-bottom: 3px solid var(--videoclub-red); /* Borde de acento */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar-brand {
+            color: var(--videoclub-red) !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(229, 9, 20, 0.5);
+        }
+        
+        /* Links de navegación */
+        .navbar-nav .nav-link {
+            color: var(--videoclub-light) !important;
+            font-weight: 500;
+            transition: color 0.3s, border-bottom 0.3s;
+            margin: 0 5px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid transparent;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-item.active .nav-link,
+        .navbar-nav .nav-link[href="{{ route('main') }}"] {
+             /* Usamos el Dorado/Amarillo para resaltar */
+            color: var(--videoclub-gold) !important; 
+            border-bottom: 3px solid var(--videoclub-gold);
+        }
+
+        /* Alertas de Mensaje */
+        .alert-success {
+            background-color: #2b4f3b; /* Verde oscuro */
+            color: #d4edda;
+            border-color: #496c56;
+        }
+
+        .alert-danger {
+            background-color: #4a1515; /* Rojo oscuro */
+            color: #f5c6cb;
+            border-color: #721c24;
+        }
+
+        /* Títulos de sección (si usas h1, h2, etc. dentro del content) */
+        h1, h2, h3, h4 {
+            color: var(--videoclub-gold);
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+    
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">VideoClub App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('main') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('pelicula.index') }}">Películas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('cliente.index') }}">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('copia.index') }}">Copias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('alquiler.index') }}">Alquiler</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container my-5">
 
-      <!-- return redirect() -> route('main')->with($message); -->
-      @if(session("mensajeTexto"))
-      <div class="alert alert-success">
-          {{ session("mensajeTexto") }}
-        </div>
-      @endif
+        @if(session("mensajeTexto"))
+            <div class="alert alert-success" role="alert">
+                {{ session("mensajeTexto") }}
+            </div>
+        @endif
 
-      <!-- return back()->withInput()->withErrors($message); -->
-      @error('mensajeTexto')
-        <div class="alert alert-danger">
-          {{ $message }}
-        </div>
-      @enderror
+        @error('mensajeTexto')
+            <div class="alert alert-danger" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
 
-      @yield('content')
+        @yield('content')
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"></script>
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
     <script src="{{ url('assets/js/main.js') }}"></script>
-  </body>
+    @yield('scripts')
+</body>
 
 </html>

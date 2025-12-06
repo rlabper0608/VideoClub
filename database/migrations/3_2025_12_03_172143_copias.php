@@ -11,7 +11,7 @@ return new class extends Migration {
         Schema::create('copia', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idpelicula');
-            $table->decimal('codigo_barras', 10);
+            $table->integer('codigo_barras')->unique();
             $table->string('estado', 60);
             $table->string('formato', 60);
             $table->timestamps();

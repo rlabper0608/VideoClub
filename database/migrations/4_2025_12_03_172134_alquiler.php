@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->decimal('precio', 6,2);
             $table->foreign('idcopia')->references('id')->on('copia');
             $table->foreign('idcliente')->references('id')->on('cliente');
+            $table->timestamps();
 
         });
     }

@@ -2,63 +2,153 @@
 
 namespace App\Http\Controllers;
 
+// Importamos el modelo y clases necesarias
+use App\Models\Cliente; 
+use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ClienteCreateRequest; 
+use App\Http\Requests\ClienteEditRequest; 
 
-class ClienteController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+
+
+class ClienteController extends Controller {
+    
+    public function index():View{
+        $clientes = Cliente::all(); 
+        return view('cliente.index', ['clientes' => $clientes]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+
+    public function create():View{
+        return view('cliente.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(ClienteCreateRequest $request):RedirectResponse{
+        
+        $cliente = new Cliente($request->all());
+        $result = false;
+        $txtmessage = "";
+
+        try {
+            $result = $cliente->save(); 
+            $txtmessage = "El cliente se ha añadido correctamente.";
+
+            if($request->hasFile('foto')) {
+                $ruta = $this->uploadFotografia($request, $cliente);
+                $cliente->foto = $ruta;
+                $cliente->save();
+            }
+            
+        } catch(UniqueConstraintViolationException $e){
+            $txtmessage = "Clave duplicada: Ya existe un cliente con esa información.";
+        } catch(QueryException $e){
+            $txtmessage = "Error en la base de datos: Valor nulo o incorrecto.";
+        }catch (\Exception $e){
+            $txtmessage = "Error Fatal al guardar el cliente.";
+        }
+
+        $message = [
+            "mensajeTexto" => $txtmessage,
+        ];
+
+        if($result){
+            return redirect()->route('main')->with($message);
+        }else{
+            return back()->withInput()->withErrors($message);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    private function uploadFotografia(Request $request, Cliente $cliente):string {
+
+        $foto = $request->file('foto'); 
+
+        $name = $cliente->id . "." . $foto->getClientOriginalExtension();
+
+        $ruta = $foto->storeAs('clientes', $name, 'public');
+
+        return $ruta;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+    public function show(Cliente $cliente):View{
+        return view('cliente.show', ['cliente' => $cliente]); 
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+
+    public function edit(Cliente $cliente):View{
+        return view('cliente.edit', ['cliente' => $cliente]); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    public function update(ClienteEditRequest $request, Cliente $cliente): RedirectResponse{ 
+
+        if($request->deleteImage == 'true' && $cliente->foto) {
+            Storage::delete($cliente->foto);
+            
+            $cliente->foto = null;
+        }
+
+        $result = false;
+        $cliente->fill($request->all());
+        $txtmessage = "";
+
+        try {
+            if($request->hasFile('foto')) {
+                if ($cliente->foto) {
+                    Storage::delete($cliente->foto); 
+                }
+                
+                $ruta = $this->uploadFotografia($request, $cliente);
+                $cliente->foto = $ruta;
+            }
+
+            $result = $cliente->save();
+            $txtmessage = "El cliente se ha actualizado correctamente.";
+        } catch(UniqueConstraintViolationException $e) {
+            $txtmessage = "Clave duplicada: Ya existe un cliente con esa información.";
+        } catch(QueryException $e) {
+            $txtmessage = "Error en la base de datos: Valor nulo o incorrecto.";
+        }catch (\Exception $e) {
+            $txtmessage = "Error fatal al actualizar el cliente.";
+        }
+
+        $message = [
+            "mensajeTexto" => $txtmessage,
+        ];
+
+        if($result){
+            return redirect()->route('main')->with($message);
+        }else{
+            return back()->withInput()->withErrors($message);
+        }
+    }
+
+    public function destroy(Cliente $cliente): RedirectResponse {
+
+        try{
+
+            if ($cliente->foto) {
+                 Storage::delete($cliente->foto);
+            }
+
+            $result = $cliente->delete();
+            $textmessage='El cliente se ha eliminado.';
+        }
+        catch(\Exception $e){
+            $result = false;
+            $textmessage='Error al eliminar el cliente.';
+        }
+        
+        $message = [
+            'mensajeTexto' => $textmessage,
+        ];
+        
+        if($result){
+            return redirect()->route('main')->with($message);
+        } else {
+            return back()->withInput()->withErrors($message);
+        }
     }
 }

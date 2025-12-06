@@ -1,0 +1,145 @@
+/* -------------------------------------- */
+/* Variables de color: Tema Esmeralda y Acero Oscuro */
+/* -------------------------------------- */
+:root {
+    --copy-dark: #1f1f1f; /* Fondo de la aplicación muy oscuro */
+    --copy-table-bg: #292929; /* Fondo de la tabla/modal */
+    --copy-header-bg: #3c3c3c; /* Fondo de la cabecera */
+    --copy-accent: #00cc99; /* Verde Esmeralda/Teal de acento */
+    --copy-focus: #66ffcc; /* Verde claro para hover/selección */
+    --copy-light: #f0f0f0; /* Texto claro */
+    --copy-secondary: #aaaaaa; /* Texto secundario/Bordes */
+    --copy-danger: #ef4444; /* Rojo para eliminación */
+    --copy-warning: #facc15; /* Amarillo para edición */
+}
+
+/* -------------------------------------- */
+/* Estilos Globales de la Vista */
+/* -------------------------------------- */
+
+.table-container {
+    padding: 1.5rem 0;
+}
+
+/* Botón principal (Añadir Nueva Copia) */
+.btn-primary-copy {
+    background-color: var(--copy-accent);
+    border-color: var(--copy-accent);
+    color: var(--copy-dark);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-primary-copy:hover {
+    background-color: #33e6b5;
+    border-color: #33e6b5;
+    transform: translateY(-1px);
+}
+
+/* -------------------------------------- */
+/* Estilos de la Tabla */
+/* -------------------------------------- */
+
+.table-hover {
+    width: 100%;
+    margin-top: 1.5rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background-color: var(--copy-table-bg);
+    color: var(--copy-light);
+}
+
+/* Cabecera (Thead) */
+.table-hover thead {
+    background-color: var(--copy-header-bg);
+    border-bottom: 2px solid var(--copy-accent);
+}
+
+.table-hover th {
+    padding: 1rem 1.2rem;
+    color: var(--copy-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: none;
+}
+
+/* Cuerpo (Tbody) */
+.table-hover tbody tr:nth-child(even) {
+    background-color: #242424; /* Alternar colores */
+}
+.table-hover tbody tr:nth-child(odd) {
+    background-color: var(--copy-table-bg);
+}
+
+/* Efecto Hover (Resaltado Esmeralda) */
+.table-hover tbody tr:hover {
+    background-color: #333;
+    color: var(--copy-focus);
+}
+
+.table-hover td {
+    padding: 1rem 1.2rem;
+    border-top: 1px solid #333;
+    font-size: 0.95rem;
+    color: var(--copy-secondary);
+}
+/* Estilo para el ID de copia (primera columna) */
+.table-hover td:first-child {
+    font-weight: 700;
+    color: var(--copy-accent);
+}
+
+/* Pie de página (Tfoot) */
+.table-hover tfoot {
+    background-color: var(--copy-header-bg);
+    border-top: 2px solid var(--copy-accent);
+}
+.table-hover tfoot th {
+    color: var(--copy-light);
+    font-weight: 700;
+}
+
+/* -------------------------------------- */
+/* Botones de Acción (Reutilizando clases Bootstrap, sobrescribiendo color) */
+/* -------------------------------------- */
+
+/* Botón Edit */
+.btn-warning {
+    background-color: var(--copy-warning);
+    border-color: var(--copy-warning);
+    color: var(--copy-dark) !important;
+    font-weight: 600;
+}
+
+/* Botón Delete */
+.btn-danger {
+    background-color: var(--copy-danger);
+    border-color: var(--copy-danger);
+    color: white !important;
+    font-weight: 600;
+}
+
+
+/* -------------------------------------- */
+/* Estilos de la Ventana Modal (Bootstrap) */
+/* -------------------------------------- */
+.modal-content {
+    background-color: var(--copy-table-bg) !important;
+    color: var(--copy-light) !important;
+    border: 1px solid var(--copy-border);
+}
+
+.modal-header, .modal-footer {
+    border-color: var(--copy-border) !important;
+}
+
+.modal-title {
+    color: var(--copy-accent) !important;
+}
+
+.modal-body {
+    color: var(--copy-secondary);
+}
