@@ -17,20 +17,20 @@ use App\Http\Requests\PeliculaCreateRequest;
 
 class PeliculaController extends Controller {
     
-    public function index():View{
+    function index():View{
         // Obtenemos todas las películas para visualizarlas
         $peliculas = Pelicula::all(); 
         return view('pelicula.index', ['peliculas' => $peliculas]);
     }
 
     
-    public function create():View{
+    function create():View{
         // Devolvemos la vista create con el formulario
         return view('pelicula.create');
     }
 
    
-    public function store(PeliculaCreateRequest $request):RedirectResponse{
+    function store(PeliculaCreateRequest $request):RedirectResponse{
 
         // Validando clave únnica compuesta
 
@@ -105,21 +105,15 @@ class PeliculaController extends Controller {
 
 
    
-    public function show(Pelicula $pelicula):View{
+    function show(Pelicula $pelicula):View{
         return view('pelicula.show', ['pelicula' => $pelicula]);
     }
 
-    /**
-     * Muestra el formulario de edición con la información de la película.
-     */
-    public function edit(Pelicula $pelicula):View{
+    function edit(Pelicula $pelicula):View{
         return view('pelicula.edit', ['pelicula' => $pelicula]);
     }
 
-    /**
-     * Actualiza la información editada de una película.
-     */
-    public function update(Request $request, Pelicula $pelicula): RedirectResponse{
+    function update(Request $request, Pelicula $pelicula): RedirectResponse{
 
         // Validando clave únnica compuesta
 
@@ -187,7 +181,7 @@ class PeliculaController extends Controller {
         }
     }
 
-    public function destroy(Pelicula $pelicula): RedirectResponse {
+    function destroy(Pelicula $pelicula): RedirectResponse {
 
         try{
             // Opcional: Borrar portada de storage antes de eliminar el registro

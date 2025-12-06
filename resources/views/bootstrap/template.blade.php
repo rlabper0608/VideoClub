@@ -64,9 +64,13 @@
 
         .navbar-nav .nav-link:hover,
         .navbar-nav .nav-item.active .nav-link,
-        .navbar-nav .nav-link[href="{{ route('main') }}"] {
+        .navbar-nav  {
              /* Usamos el Dorado/Amarillo para resaltar */
             color: var(--videoclub-gold) !important; 
+            
+        }
+
+        .nav-link:hover {
             border-bottom: 3px solid var(--videoclub-gold);
         }
 

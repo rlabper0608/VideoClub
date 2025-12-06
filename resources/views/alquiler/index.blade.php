@@ -35,7 +35,7 @@ Listado de Peliculas Alquiladas
 <!-- Ventanas modales fin -->
 
 <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
-<h2 style="color: var(--rent-accent); margin-bottom: 0;">Registro de Alquileres</h2>
+<h2 style="color: var(--rent-accent); margin-bottom: 0;">Registro de Alquileres ({{ $alquileres->count() }})</h2>
 <!-- Botón de Nuevo Alquiler -->
 <a href="{{ route('alquiler.create') }}" class="btn btn-primary"
 style="background-color: var(--rent-accent, #8b5cf6); border-color: var(--rent-accent, #8b5cf6); font-weight: 600;">
@@ -86,7 +86,4 @@ style="background-color: var(--rent-accent, #8b5cf6); border-color: var(--rent-a
     @csrf
     @method('delete')
 </form>
-
-
 @endsection
-

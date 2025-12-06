@@ -10,11 +10,11 @@ class Alquiler extends Model{
 
     protected $fillable = ['idcopia', 'idcliente', 'fecha_dev', 'fecha_sal', 'precio'];
 
-    function cliente(): BelongsTo {
-        return $this->belongsTo('App\Models\Cliente', 'idcliente');
+     public function copia(): BelongsTo {
+        return $this->belongsTo(Copia::class, 'idcopia');
     }
 
-    function copia(): BelongsTo {
-        return $this->BelongsTo('App\Models\Alquiler', 'idcopia');
+    public function cliente(): BelongsTo {
+        return $this->belongsTo(Cliente::class, 'idcliente');
     }
 }

@@ -5,21 +5,22 @@ Editar un alquiler
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ url('assets/css/alquiler/createStyle.css') }}">
+<link rel="stylesheet" href="{{ url('assets/css/alquiler/editStyle.css') }}">
 @endsection
 
 @section('content')
-<form action="{{ route('alquiler.store') }}" method="post" enctype="multipart/form-data"> 
+<form action="{{ route('alquiler.update', $alquiler->id) }}" method="post"> 
     @csrf
+    @method('put')
     <div class="espacio">
         @error('idcopia')
         <div class="alert alert-danger">
             {{ $message }}
         </div>
         @enderror
-        <label for="idcopia">Pelicula que se va a alquilar</label>
+        <label for="idcopia">Copia que se va a alquilar:</label>
         <select name="idcopia" id="idcopia" required class="form-control">
-            <option value="" @if(old('idcopia', $alquiler->idcopia</option>) == null) selected @endif disabled>Selecciona una pelicula</option>
+            <option value="" @if(old('idcopia', $alquiler->idcopia) == null) selected @endif disabled>Selecciona una pelicula</option>
             @foreach($copias as $copia)
                 <option value="{{ $copia->id }}" @if(old('idcopia', $alquiler->idcopia) == $copia->id) selected @endif>{{ $copia->pelicula->titulo }}</option>
             @endforeach
@@ -31,11 +32,11 @@ Editar un alquiler
             {{ $message }}
         </div>
         @enderror
-        <label for="idcliente">Cliente que alquila</label>
+        <label for="idcliente">Cliente que va a alquilar:</label>
         <select name="idcliente" id="idcliente" required class="form-control">
-            <option value="" @if(old('idcliente', $alquiler->idcliente</option>) == null) selected @endif disabled>Selecciona un cliente</option>
+            <option value="" @if(old('idcliente', $alquiler->idcliente) == null) selected @endif disabled>Selecciona un cliente</option>
             @foreach($clientes as $indice=>$idcliente)
-                <option value="{{ $indice }}" @if(old('idcliente', $alquiler->idcliente</option>) == $indice) selected @endif>{{ $idcliente }}</option>
+                <option value="{{ $indice }}" @if(old('idcliente', $alquiler->idcliente) == $indice) selected @endif>{{ $idcliente }}</option>
             @endforeach
          </select>
     </div>

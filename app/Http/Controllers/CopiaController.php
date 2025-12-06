@@ -18,20 +18,17 @@ use App\Http\Requests\CopiaEditRequest;
 
 class CopiaController extends Controller {
     
-    /**
-     * Muestra una lista de todas las copias.
-     */
-    public function index(): View {
+    function index(): View {
         $copias = Copia::all(); 
         return view('copia.index', ['copias' => $copias]);
     }
 
-    public function create():View{
+    function create(): View {
         $peliculas = Pelicula::pluck('titulo', 'id');
         return view('copia.create', ['peliculas' => $peliculas]);
     }
 
-    public function store(CopiaCreateRequest $request):RedirectResponse{
+    function store(CopiaCreateRequest $request): RedirectResponse {
         
         $copia = new Copia($request->all());
         $result = false;
@@ -66,13 +63,13 @@ class CopiaController extends Controller {
     // }
    
 
-    public function edit(Copia $copia):View{
+    function edit(Copia $copia): View {
         $peliculas = Pelicula::pluck('titulo', 'id');
 
         return view('copia.edit', ['copia' => $copia, 'peliculas' => $peliculas]);
     }
 
-    public function update(CopiaEditRequest $request, Copia $copia): RedirectResponse{
+    function update(CopiaEditRequest $request, Copia $copia): RedirectResponse {
 
         $result = false;
         $copia->fill($request->all());
@@ -100,7 +97,7 @@ class CopiaController extends Controller {
         }
     }
 
-    public function destroy(Copia $copia): RedirectResponse {
+    function destroy(Copia $copia): RedirectResponse {
 
         try{      
             $result = $copia->delete();

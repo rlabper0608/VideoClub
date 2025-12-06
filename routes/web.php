@@ -10,7 +10,18 @@ use App\Http\Controllers\AlquilerController;
 Route::get('/', [MainController::class, 'main'])->name('main');          
 Route::get('about', [MainController::class, 'about'])->name('about'); 
 
-Route::resource('pelicula', PeliculaController::class);
-Route::resource('cliente', ClienteController::class);
-Route::resource('copia', CopiaController::class);
 Route::resource('alquiler', AlquilerController::class);
+Route::resource('cliente', ClienteController::class);
+Route::resource('pelicula', PeliculaController::class);
+
+Route::get('copia', [CopiaController::class, 'index'])->name('copia.index');
+Route::get('copia/create', [CopiaController::class, 'create'])->name('copia.create');
+Route::post('copia', [CopiaController::class, 'store'])->name('copia.store');
+Route::get('copia/{copia}', [CopiaController::class, 'show'])->name('copia.show'); 
+Route::get('copia/{copia}/edit', [CopiaController::class, 'edit'])->name('copia.edit');
+Route::put('copia/{copia}', [CopiaController::class, 'update'])->name('copia.update');
+Route::delete('copia/{copia}', [CopiaController::class, 'destroy'])->name('copia.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

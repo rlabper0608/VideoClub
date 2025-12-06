@@ -7,7 +7,7 @@ Catálogo de Películas
 @section('styles')
 <link rel="stylesheet" href="https://www.google.com/search?q=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40B7iMtyqQgS/l/e1Mh/QdJ0bN4FwV2Z8aP2E1gI1r0Z9GzR5eP+K7vK3hN+FfGjE1g/l+l+p3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<link rel="stylesheet" href="{{ url('assets/css/peliculas/indexStyle.css') }}">
+<link rel="stylesheet" href="{{ url('assets/css/pelicula/indexStyle.css') }}">
 
 @endsection
 
@@ -43,7 +43,7 @@ Catálogo de Películas
             {{-- Clase poster-card aplica fondo oscuro y borde --}}
             <div class="card h-100 poster-card shadow-lg">
                 <div class="poster-image-container">
-                    <img src="{{ $pelicula->getPath() }}" alt="">
+                    <img src="{{ $pelicula->getPath() }}" class="poster-image" alt="">
                 </div>
                     
                 <div class="card-body text-center d-flex flex-column">

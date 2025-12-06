@@ -12,11 +12,11 @@ class Copia extends Model {
 
     protected $fillable = ['idpelicula', 'codigo_barras', 'estado', 'formato'];
 
-    function cliente(): BelongsTo {
-        return $this->belongsTo('App\Models\Cliente', 'idcliente');
+    public function pelicula(): BelongsTo {
+        return $this->belongsTo(Pelicula::class, 'idpelicula');
     }
 
-    function pelicula(): BelongsTo {
-        return $this->belongsTo('App\Models\Pelicula', 'idpelicula');
+    public function cliente(): BelongsTo {
+        return $this->belongsTo(Cliente::class, 'idcliente');
     }
 }

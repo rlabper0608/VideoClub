@@ -17,17 +17,17 @@ use App\Http\Requests\ClienteEditRequest;
 
 class ClienteController extends Controller {
     
-    public function index():View{
+    function index():View{
         $clientes = Cliente::all(); 
         return view('cliente.index', ['clientes' => $clientes]);
     }
 
 
-    public function create():View{
+    function create():View{
         return view('cliente.create');
     }
 
-    public function store(ClienteCreateRequest $request):RedirectResponse{
+    function store(ClienteCreateRequest $request):RedirectResponse{
         
         $cliente = new Cliente($request->all());
         $result = false;
@@ -73,16 +73,16 @@ class ClienteController extends Controller {
         return $ruta;
     }
 
-    public function show(Cliente $cliente):View{
+    function show(Cliente $cliente):View{
         return view('cliente.show', ['cliente' => $cliente]); 
     }
 
 
-    public function edit(Cliente $cliente):View{
+    function edit(Cliente $cliente):View{
         return view('cliente.edit', ['cliente' => $cliente]); 
     }
 
-    public function update(ClienteEditRequest $request, Cliente $cliente): RedirectResponse{ 
+    function update(ClienteEditRequest $request, Cliente $cliente): RedirectResponse{ 
 
         if($request->deleteImage == 'true' && $cliente->foto) {
             Storage::delete($cliente->foto);
@@ -125,7 +125,7 @@ class ClienteController extends Controller {
         }
     }
 
-    public function destroy(Cliente $cliente): RedirectResponse {
+    function destroy(Cliente $cliente): RedirectResponse {
 
         try{
 

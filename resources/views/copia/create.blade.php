@@ -17,6 +17,7 @@ Añadir una Copia
             {{ $message }}
         </div>
         @enderror
+        <label for="idpelicula">Copia de la película:</label>
         <select name="idpelicula" id="idpelicula" required class="form-control">
             <option value="" @if(old('idpelicula') == null) selected @endif disabled>Selecciona una pelicula</option>
             @foreach($peliculas as $indice=>$idpelicula)

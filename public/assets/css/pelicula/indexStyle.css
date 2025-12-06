@@ -54,6 +54,8 @@
 }
 
 .poster-image {
+    /* CORRECCIÓN CLAVE: Fuerza la imagen a tomar el 100% del ancho de su contenedor */
+    width: 100%; 
     height: 350px;
     object-fit: cover;
     border-radius: 10px 10px 0 0;

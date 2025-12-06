@@ -19,18 +19,18 @@ use App\Http\Requests\AlquilerEditRequest;
 class AlquilerController extends Controller {
     
 
-    public function index(): View {
-        $alquileres = Alquiler::all(); 
+    function index(): View {
+        $alquileres = Alquiler::with(['copia.pelicula', 'cliente'])->get();
         return view('alquiler.index', ['alquileres' => $alquileres]);
     }
 
-    public function create():View{
+    function create():View{
         $clientes = Cliente::pluck('nombre', 'id');
         $copias = Copia::with('pelicula')->get();
         return view('alquiler.create', ['clientes' => $clientes, 'copias' => $copias]);
     }
 
-    public function store(AlquilerCreateRequest $request):RedirectResponse{
+    function store(AlquilerCreateRequest $request):RedirectResponse{
         
         // Creamos un nuevo objeto Alquiler con los datos del request
         $alquiler = new Alquiler($request->all());
@@ -61,12 +61,14 @@ class AlquilerController extends Controller {
     //     return view('alquiler.show', ['alquiler' => $alquiler]);
     // }
 
-    public function edit(Alquiler $alquiler):View{
-        return view('alquiler.edit', ['alquiler' => $alquiler]);
+    function edit(Alquiler $alquiler):View{
+        $copias = Copia::with('pelicula')->get();
+        $clientes = Cliente::pluck('nombre', 'id');
+        return view('alquiler.edit', ['alquiler' => $alquiler, 'copias' => $copias, 'clientes' => $clientes]);
     }
 
 
-    public function update(Request $request, Alquiler $alquiler): RedirectResponse{
+    function update(Request $request, Alquiler $alquiler): RedirectResponse{
 
 
         $result = false;
@@ -95,7 +97,8 @@ class AlquilerController extends Controller {
             return back()->withInput()->withErrors($message);
         }
     }
-    public function destroy(Alquiler $alquiler): RedirectResponse {
+
+    function destroy(Alquiler $alquiler): RedirectResponse {
 
         try{
             $result = $alquiler->delete();

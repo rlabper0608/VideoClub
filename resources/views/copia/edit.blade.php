@@ -5,18 +5,20 @@ Editar una Copia
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ url('assets/css/copia/createStyle.css') }}">
+<link rel="stylesheet" href="{{ url('assets/css/copia/editStyle.css') }}">
 @endsection
 
 @section('content')
-<form action="{{ route('copia.store') }}" method="post" enctype="multipart/form-data"> 
+<form action="{{ route('copia.update', $copia->id) }}" method="post"> 
     @csrf
+    @method('put')
     <div class="espacio">
         @error('idpelicula')
         <div class="alert alert-danger">
             {{ $message }}
         </div>
         @enderror
+        <label for="idpelicula">Copia de la película:</label>
         <select name="idpelicula" id="idpelicula" required class="form-control">
             <option value="" @if(old('idpelicula', $copia->idpelicula) == null) selected @endif disabled>Selecciona una pelicula</option>
             @foreach($peliculas as $indice=>$idpelicula)

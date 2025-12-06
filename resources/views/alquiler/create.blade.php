@@ -5,7 +5,7 @@ Crear un Alquiler
 @endsection
 
 @section('styles')
-<link rel="stylesheet" href="{{ url('assets/css/alquiler/createStyle.css') }}">
+<link rel="stylesheet" href="{{ url('assets/css/alquiler/createStyles.css') }}">
 @endsection
 
 @section('content')
@@ -17,6 +17,7 @@ Crear un Alquiler
             {{ $message }}
         </div>
         @enderror
+        <label for="idcopia">Copia que se va a alquilar:</label>
         <select name="idcopia" id="idcopia" required class="form-control">
             <option value="" @if(old('idcopia') == null) selected @endif disabled>Selecciona una pelicula</option>
             @foreach($copias as $copia)
@@ -30,6 +31,7 @@ Crear un Alquiler
             {{ $message }}
         </div>
         @enderror
+        <label for="idcliente">Cliente que va a alquilar:</label>
         <select name="idcliente" id="idcliente" required class="form-control">
             <option value="" @if(old('idcliente') == null) selected @endif disabled>Selecciona un cliente</option>
             @foreach($clientes as $indice=>$idcliente)

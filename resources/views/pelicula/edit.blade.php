@@ -114,3 +114,7 @@ Editar Cliente
     </div>
 </form>
 @endsection
+
+@section('scripts')
+<script src="{{  url('assets/js/arrastrar.js') }}"></script>
+@endsection
