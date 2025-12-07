@@ -8,9 +8,11 @@ use Illuminate\View\View;
 
 class MainController extends Controller {
    function main(): View {
-        // $peinados = Peinado::all();
-        // return view('main.main', ['peinados' => $peinados]);
         return view('main.main');
+    }
+
+    function about(): View {
+        return view('main.about');
     }
 }
 

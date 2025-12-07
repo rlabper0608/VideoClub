@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MainController; 
-use App\Http\Controllers\PeliculaController; 
+use App\Http\Controllers\AlquilerController; 
 use App\Http\Controllers\ClienteController; 
 use App\Http\Controllers\CopiaController; 
-use App\Http\Controllers\AlquilerController; 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MainController; 
+use App\Http\Controllers\PeliculaController; 
 
 Route::get('/', [MainController::class, 'main'])->name('main');          
 Route::get('about', [MainController::class, 'about'])->name('about'); 
@@ -22,6 +23,8 @@ Route::get('copia/{copia}/edit', [CopiaController::class, 'edit'])->name('copia.
 Route::put('copia/{copia}', [CopiaController::class, 'update'])->name('copia.update');
 Route::delete('copia/{copia}', [CopiaController::class, 'destroy'])->name('copia.destroy');
 
-Auth::routes();
+Auth::routes(['verify'=> true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/edit', [HomeController::class, 'edit'])->name('home.edit');
+Route::put('/home', [HomeController::class, 'update'])->name('home.update');

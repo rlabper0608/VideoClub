@@ -124,6 +124,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('alquiler.index') }}">Alquiler</a>
                     </li>
+                    
+                </ul>
+                <ul class="navbar-nav  me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        @guest
+                            <a class="nav-link active" href="{{ route('login') }}">Login</a>
+                        @else
+                            <a class="nav-link active" href="#" id="logout-link">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="post" class="d-none">
+                                @csrf
+                            </form>
+                        @endguest
+                    </li>
                 </ul>
             </div>
         </div>

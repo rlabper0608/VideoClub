@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('bootstrap.template')
 
 @section('content')
 <div class="container">
@@ -56,6 +56,10 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                        {{ __('Register') }}
+                                </a>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
